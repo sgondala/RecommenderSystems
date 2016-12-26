@@ -24,6 +24,28 @@ def getUserRatingsDict():
         userRatings[user][bookId] = ratingGiven
     conn.close()
     return userRatings
+
+
+def getBookRatingsDict():
+    """
+    Gets the ratings of books
+    """
+    bookRatings = {}
+    conn = psycopg2.connect(database='sashank',user='sashank',password='x',host='localhost')
+    cur = conn.cursor()
+    cur.execute('SELECT * from "Ratings";')
+    for row in cur:
+        user = row[0]
+        bookId = row[1]
+        ratingGiven = row[2]
+        if bookId not in bookRatings:
+            bookRatings[bookId] = {}
+        bookRatings[bookId][user] = ratingGiven
+    conn.close()
+    return bookRatings
+
+
     
-#userRatings = getUserRatingsDict()
+userRatings = getUserRatingsDict()
+bookRatings = getBookRatingsDict()
 #a = 10
