@@ -15,18 +15,18 @@ def eucledianDistanceMetric(ratings, user1, user2):
         totalSum += (user1Rating - user2Rating)**2
     return 1/(1+math.sqrt(totalSum))
     
-def allSimilarity(ratings, distanceMetric):
-    itemList = ratings.keys()
-    itemSimilarityDict = {}
-    i = 0    
-    for item1 in itemList:
-        itemSimilarityDict[item1] = {}
-        for item2 in itemList:
-            if(item1 == item2):
-                continue
-            itemSimilarityDict[item1][item2] = distanceMetric(ratings, item1, item2)
-        i += 1
-        #print i
-        if i == 10:
-            return
-    return itemSimilarityDict
+    def allSimilarity(ratings, distanceMetric):
+        itemList = ratings.keys()
+        itemSimilarityDict = {}
+        i = 0    
+        for item1 in itemList:
+            itemSimilarityDict[item1] = {}
+            for item2 in itemList:
+                if(item1 == item2):
+                    continue
+                itemSimilarityDict[item1][item2] = distanceMetric(ratings, item1, item2)
+            i += 1
+            #print i
+            if i == 100:
+                return
+        return itemSimilarityDict
