@@ -3,4 +3,4 @@ Data from http://www2.informatik.uni-freiburg.de/~cziegler/BX/
 Importing Data into DB:
 Inserted SQL dump in MySQL and followes instructions in here - https://github.com/lanyrd/mysql-postgresql-converter
 
-
+Select books only which has atleast 5 ratings users who gave atleast 5 ratings- select * from "Ratings" where "ISBN" in (select "ISBN" from "Ratings" group by "ISBN" having count(*) >= 5) and "User-ID" in (select "User-ID" from "Ratings" group by "User-ID" having count(*) >= 5);

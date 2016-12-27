@@ -26,14 +26,14 @@ def getUserRatingsDict():
     return userRatings
 
 
-def getBookRatingsDict():
+def getBookRatingsDict(sqlString):
     """
     Gets the ratings of books
     """
     bookRatings = {}
     conn = psycopg2.connect(database='sashank',user='sashank',password='x',host='localhost')
     cur = conn.cursor()
-    cur.execute('SELECT * from "Ratings";')
+    cur.execute(sqlString)
     for row in cur:
         user = row[0]
         bookId = row[1]
@@ -44,8 +44,4 @@ def getBookRatingsDict():
     conn.close()
     return bookRatings
 
-
-    
-userRatings = getUserRatingsDict()
-bookRatings = getBookRatingsDict()
 #a = 10
