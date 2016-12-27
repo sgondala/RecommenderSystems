@@ -7,7 +7,8 @@ import cPickle as pickle
 import myPrint
 
 myPrint.myPrint("progress","Starting")
-bookRatings = populateDict.getBookRatingsDict('select * from "Ratings" where "ISBN" in (select "ISBN" from "Ratings" group by "ISBN" having count(*) >= 5) and "User-ID" in (select "User-ID" from "Ratings" group by "User-ID" having count(*) >= 5);')
+#bookRatings = populateDict.getBookRatingsDict('select * from "Ratings" where "ISBN" in (select "ISBN" from "Ratings" group by "ISBN" having count(*) >= 5) and "User-ID" in (select "User-ID" from "Ratings" group by "User-ID" having count(*) >= 5);')
+bookRatings = pickle.load(open("bookRatings.p","r"))
 myPrint.myPrint("progress","bookRatings Done")
 bookSimilarityDict = helperFunctions.allSimilarity(bookRatings, helperFunctions.eucledianDistanceMetric, 10, 100)
 myPrint.myPrint("progress","Calculations done, To start pickling")
