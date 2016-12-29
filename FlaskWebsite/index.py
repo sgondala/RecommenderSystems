@@ -24,9 +24,14 @@ class BookForm(FlaskForm):
 def homePage():
     form = BookForm()
     if form.validate_on_submit():
-        flask.session['name'] = form.name.data
-        return flask.redirect('http://www.google.com')
-    return flask.render_template('index.html',name=flask.session.get('name'),form=form)
+        return flask.redirect(flask.url_for("bookPage",bookName=form.name.data))
+    return flask.render_template('index.html',form=form)
+    
+@app.route('/book')
+def bookPage():
+    bookName = flask.request.args.get('bookName')
+    similarityDict = {'Hi':0.9, 'Hello': 0.1}
+    return flask.render_template('bookPage.html', similarityDict=similarityDict)
 
 if __name__=='__main__':
-    app.run()
+    app.run(debug=True)
